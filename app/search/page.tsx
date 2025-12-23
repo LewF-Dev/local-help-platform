@@ -134,17 +134,17 @@ export default function SearchPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen min-h-screen">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">
+          <h1 className="text-4xl font-bold text-zinc-100 mb-2">
             Find Local Help
           </h1>
-          <p className="text-slate-600">
+          <p className="text-zinc-400">
             Search for verified service providers in your area
           </p>
         </motion.div>
@@ -165,13 +165,13 @@ export default function SearchPage() {
                   required
                 />
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-zinc-300 mb-1">
                     Category
                   </label>
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     {categories.map((cat) => (
                       <option key={cat.value} value={cat.value}>
@@ -196,13 +196,13 @@ export default function SearchPage() {
           >
             {trades.length === 0 ? (
               <Card>
-                <p className="text-center text-slate-600 py-8">
+                <p className="text-center text-zinc-400 py-8">
                   No service providers found in your area. Try expanding your search or selecting a different category.
                 </p>
               </Card>
             ) : (
               <div className="space-y-4">
-                <h2 className="text-2xl font-bold text-slate-900">
+                <h2 className="text-2xl font-bold text-zinc-100">
                   {trades.length} {trades.length === 1 ? "Provider" : "Providers"} Found
                 </h2>
                 {trades.map((trade, index) => {
@@ -226,10 +226,10 @@ export default function SearchPage() {
                       <Card hover>
                         <div className="flex justify-between items-start mb-4">
                           <div>
-                            <h3 className="text-2xl font-bold text-slate-900">
+                            <h3 className="text-2xl font-bold text-zinc-100">
                               {trade.businessName}
                             </h3>
-                            <p className="text-slate-600">{formatCategory(trade.category)}</p>
+                            <p className="text-zinc-400">{formatCategory(trade.category)}</p>
                           </div>
                           <div className="text-right space-y-2">
                             {trade.verified && (
@@ -245,19 +245,19 @@ export default function SearchPage() {
                                 {formatReliabilityLabel(reliability.percentage)}
                               </span>
                             ) : (
-                              <span className="block px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium">
+                              <span className="block px-3 py-1 bg-zinc-800 text-zinc-300 rounded-full text-sm font-medium">
                                 {reliability.label}
                               </span>
                             )}
-                            <p className="text-sm text-slate-600">
+                            <p className="text-sm text-zinc-400">
                               ~{trade.distance} miles away
                             </p>
                           </div>
                         </div>
 
-                      <p className="text-slate-700 mb-4">{trade.description}</p>
+                      <p className="text-zinc-300 mb-4">{trade.description}</p>
 
-                      <div className="flex flex-wrap gap-2 text-sm text-slate-600 mb-4">
+                      <div className="flex flex-wrap gap-2 text-sm text-zinc-400 mb-4">
                         <span>📍 {trade.postcode}</span>
                         <span>📏 {trade.serviceRadius} mile radius</span>
                       </div>
@@ -300,9 +300,9 @@ export default function SearchPage() {
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-zinc-900/50 backdrop-blur-xl border border-zinc-800/50 rounded-2xl p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
             >
-              <h2 className="text-2xl font-bold text-slate-900 mb-4">
+              <h2 className="text-2xl font-bold text-zinc-100 mb-4">
                 Send Enquiry to {selectedTrade.businessName}
               </h2>
 
@@ -333,25 +333,25 @@ export default function SearchPage() {
                   required
                 />
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-zinc-300 mb-1">
                     Job Description
                   </label>
                   <textarea
                     value={enquiryForm.jobDescription}
                     onChange={(e) => setEnquiryForm({ ...enquiryForm, jobDescription: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[120px]"
+                    className="w-full px-4 py-2 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[120px]"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-zinc-300 mb-1">
                     When do you need this done?
                   </label>
                   <select
                     value={enquiryForm.urgency}
                     onChange={(e) => setEnquiryForm({ ...enquiryForm, urgency: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="ASAP">ASAP</option>
                     <option value="TODAY">Today</option>

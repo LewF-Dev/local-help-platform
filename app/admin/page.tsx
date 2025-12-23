@@ -80,20 +80,20 @@ export default function AdminPage() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">Admin Panel</h1>
-          <p className="text-slate-600">Manage trade profiles and verifications</p>
+          <h1 className="text-4xl font-bold text-zinc-100 mb-2">Admin Panel</h1>
+          <p className="text-zinc-400">Manage trade profiles and verifications</p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl shadow-lg p-6"
+          className="bg-zinc-900/50 backdrop-blur-xl border border-zinc-800/50 rounded-2xl shadow-lg p-6"
         >
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">All Trades</h2>
+          <h2 className="text-2xl font-bold text-zinc-100 mb-6">All Trades</h2>
 
           {trades.length === 0 ? (
-            <p className="text-slate-600 text-center py-8">No trades registered yet</p>
+            <p className="text-zinc-400 text-center py-8">No trades registered yet</p>
           ) : (
             <div className="space-y-4">
               {trades.map((trade, index) => (
@@ -102,14 +102,14 @@ export default function AdminPage() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
-                  className="border border-slate-200 rounded-lg p-4 hover:shadow-md transition-shadow"
+                  className="border border-zinc-800 rounded-lg p-4 hover:shadow-md transition-shadow"
                 >
                   <div className="flex justify-between items-start mb-3">
                     <div>
-                      <h3 className="font-semibold text-slate-900 text-lg">
+                      <h3 className="font-semibold text-zinc-100 text-lg">
                         {trade.businessName}
                       </h3>
-                      <p className="text-slate-600">{formatCategory(trade.category)}</p>
+                      <p className="text-zinc-400">{formatCategory(trade.category)}</p>
                       <p className="text-sm text-slate-500 mt-1">
                         {trade.user.name} • {trade.user.email}
                       </p>
@@ -133,7 +133,7 @@ export default function AdminPage() {
                     </div>
                   </div>
 
-                  <div className="flex gap-4 text-sm text-slate-600 mb-3">
+                  <div className="flex gap-4 text-sm text-zinc-400 mb-3">
                     <span>📍 {trade.postcode}</span>
                     <span>📊 {trade.enquiriesReceived} enquiries</span>
                     {trade.user.phone && <span>📞 {trade.user.phone}</span>}

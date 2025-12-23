@@ -102,10 +102,10 @@ export default function RegisterPage() {
       >
         <Card>
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">
+            <h1 className="text-3xl font-bold text-zinc-100 mb-2">
               Create Account
             </h1>
-            <p className="text-slate-600">
+            <p className="text-zinc-400">
               Join LocalTrades today
             </p>
           </div>
@@ -116,8 +116,8 @@ export default function RegisterPage() {
               onClick={() => setRole("CLIENT")}
               className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
                 role === "CLIENT"
-                  ? "bg-blue-600 text-white"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                  ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white"
+                  : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
               }`}
             >
               I Need Help
@@ -127,8 +127,8 @@ export default function RegisterPage() {
               onClick={() => setRole("TRADE")}
               className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
                 role === "TRADE"
-                  ? "bg-blue-600 text-white"
-                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                  ? "bg-gradient-to-r from-violet-600 to-purple-600 text-white"
+                  : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700"
               }`}
             >
               I Offer Services
@@ -175,7 +175,7 @@ export default function RegisterPage() {
             {role === "TRADE" && (
               <>
                 <div className="border-t pt-4 mt-6">
-                  <h3 className="text-lg font-semibold text-slate-900 mb-4">
+                  <h3 className="text-lg font-semibold text-zinc-100 mb-4">
                     Service Profile
                   </h3>
                 </div>
@@ -188,13 +188,13 @@ export default function RegisterPage() {
                 />
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-zinc-300 mb-1">
                     Category
                   </label>
                   <select
                     value={formData.category}
                     onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                   >
                     {categories.map((cat) => (
@@ -206,13 +206,13 @@ export default function RegisterPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-zinc-300 mb-1">
                     Description
                   </label>
                   <textarea
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px]"
+                    className="w-full px-4 py-2 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[100px]"
                     placeholder="Describe your services..."
                     required
                   />
@@ -227,7 +227,7 @@ export default function RegisterPage() {
                 />
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                  <label className="block text-sm font-medium text-zinc-300 mb-1">
                     Service Radius (miles)
                   </label>
                   <input
@@ -236,7 +236,7 @@ export default function RegisterPage() {
                     max="50"
                     value={formData.serviceRadius}
                     onChange={(e) => setFormData({ ...formData, serviceRadius: parseInt(e.target.value) })}
-                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full px-4 py-2 border border-zinc-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                   />
                 </div>
@@ -255,7 +255,7 @@ export default function RegisterPage() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-slate-600">
+            <p className="text-zinc-400">
               Already have an account?{" "}
               <Link href="/login" className="text-blue-600 hover:text-blue-700 font-medium">
                 Sign in here
