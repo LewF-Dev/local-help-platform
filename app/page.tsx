@@ -39,12 +39,12 @@ export default function Home() {
   ]
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-x-hidden">
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-purple-600/20 to-pink-600/20"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.1),transparent_50%)]"></div>
         
-        <div className="relative max-w-7xl mx-auto px-4 py-24 sm:py-32">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-24 sm:py-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -97,9 +97,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 relative">
+      <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-600/5 to-transparent"></div>
-        <div className="max-w-7xl mx-auto px-4 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -138,8 +138,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="py-20 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -214,38 +214,64 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-600/20 via-purple-600/20 to-pink-600/20"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(139,92,246,0.2),transparent_70%)]"></div>
-        <div className="max-w-4xl mx-auto px-4 text-center relative">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-violet-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Ready to Get Started?
-              </span>
-            </h2>
-            <p className="text-xl text-zinc-400 mb-8">
-              Join people finding and offering local help
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/search">
-                <Button size="lg" variant="gradient">
-                  Find Help
-                </Button>
-              </Link>
-              <Link href="/register">
-                <Button size="lg" variant="outline">
-                  Offer Services
-                </Button>
-              </Link>
+      <footer className="relative border-t border-zinc-800/50 mt-20">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-950/50"></div>
+        <div className="max-w-7xl mx-auto px-4 py-16 relative">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+            <div className="md:col-span-2">
+              <div className="text-2xl font-bold bg-gradient-to-r from-violet-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
+                LocalHelp
+              </div>
+              <p className="text-zinc-400 mb-4 max-w-md">
+                Connecting local professionals with people who need help. No middleman, no commission, just direct contact.
+              </p>
+              <div className="flex gap-4">
+                <Link href="/search">
+                  <Button size="sm" variant="gradient">
+                    Find Help
+                  </Button>
+                </Link>
+                <Link href="/register">
+                  <Button size="sm" variant="outline">
+                    Join Now
+                  </Button>
+                </Link>
+              </div>
             </div>
-          </motion.div>
+            
+            <div>
+              <h3 className="text-zinc-100 font-semibold mb-4">Platform</h3>
+              <ul className="space-y-2 text-zinc-400">
+                <li><Link href="/search" className="hover:text-violet-400 transition-colors">Find Services</Link></li>
+                <li><Link href="/register" className="hover:text-violet-400 transition-colors">Become a Provider</Link></li>
+                <li><Link href="/dashboard" className="hover:text-violet-400 transition-colors">Dashboard</Link></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-zinc-100 font-semibold mb-4">Support</h3>
+              <ul className="space-y-2 text-zinc-400">
+                <li><a href="#" className="hover:text-violet-400 transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-violet-400 transition-colors">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-violet-400 transition-colors">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-zinc-800/50 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-zinc-500 text-sm">
+                © 2024 LocalHelp. All rights reserved.
+              </p>
+              <div className="flex gap-6 text-zinc-500 text-sm">
+                <a href="#" className="hover:text-violet-400 transition-colors">Twitter</a>
+                <a href="#" className="hover:text-violet-400 transition-colors">LinkedIn</a>
+                <a href="#" className="hover:text-violet-400 transition-colors">GitHub</a>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      </footer>
     </div>
   )
 }
