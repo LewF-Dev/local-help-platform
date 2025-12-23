@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "LocalTrades - Find Local Tradespeople",
-  description: "Connect with verified local tradespeople in your area. Plumbers, electricians, builders, and more.",
+  title: "LocalHelp - Find Local Services",
+  description: "Find someone local who can come to you and help. Verified professionals for physical services in your area.",
 };
 
 export default function RootLayout({

@@ -1,27 +1,28 @@
-# LocalTrades - Local Trades Marketplace
+# LocalHelp - Local Physical Services Platform
 
-A modern web platform connecting local tradespeople with customers. Built with Next.js 14, TypeScript, Prisma, and Tailwind CSS.
+A modern web platform connecting people who need local, physical help with service providers who can come to them. Built with Next.js 14, TypeScript, Prisma, and Tailwind CSS.
 
 ## Features
 
 ### For Customers
-- Search for verified local tradespeople by postcode and category
-- View detailed trade profiles with service areas
-- Send enquiries directly through the platform
-- Access direct contact information for verified trades
+- Search for verified local service providers by postcode and category
+- View detailed profiles with service areas and reliability scores
+- Send enquiries with urgency preferences (ASAP, today, this week, flexible)
+- Access direct contact information for verified providers
 - Track enquiry status in personal dashboard
 
-### For Trades
+### For Service Providers
 - Create detailed business profiles
 - Receive first 3 enquiries completely free
 - Simple monthly subscription model (no commission)
+- Build reliability score through responsive behavior
 - Manage all enquiries from centralized dashboard
 - Control service area and availability
 - Accept, decline, or contact clients directly
 
 ### For Admins
-- Verify trade profiles
-- Monitor platform activity
+- Verify service provider profiles
+- Monitor platform activity and reliability metrics
 - Manage user accounts
 
 ## Tech Stack
@@ -84,19 +85,23 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## Database Schema
 
 ### User
-- Stores user accounts (trades, clients, admins)
+- Stores user accounts (service providers, clients, admins)
 - Handles authentication credentials
-- Links to trade profiles
+- Links to service profiles
 
-### TradeProfile
+### TradeProfile (Service Provider Profile)
 - Business information and service details
 - Location and service radius
 - Subscription and verification status
 - Free enquiry tracking
+- Reliability metrics (response rate, acceptance rate, response time)
+- Activity tracking
 
 ### Enquiry
-- Job requests from clients to trades
+- Job requests from clients to service providers
 - Status tracking (pending, accepted, declined, contacted)
+- Urgency preferences (ASAP, today, this week, by date, flexible)
+- Response time tracking
 - Client contact information
 
 ## Project Structure

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { getServerSession } from "next-auth"
-import { authOptions } from "@/lib/auth"
+import { auth } from "@/lib/auth"
+
 import { prisma } from "@/lib/prisma"
 import { z } from "zod"
 
@@ -10,12 +10,14 @@ const createEnquirySchema = z.object({
   clientEmail: z.string().email(),
   clientPhone: z.string().min(10),
   clientPostcode: z.string().min(5),
-  jobDescription: z.string().min(20)
+  jobDescription: z.string().min(20),
+  urgency: z.enum(["ASAP", "TODAY", "THIS_WEEK", "BY_DATE", "FLEXIBLE"]).optional(),
+  preferredDate: z.string().optional()
 })
 
 export async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
     
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -44,7 +46,9 @@ export async function POST(req: Request) {
         clientEmail: data.clientEmail,
         clientPhone: data.clientPhone,
         clientPostcode: data.clientPostcode.toUpperCase().replace(/\s+/g, ''),
-        jobDescription: data.jobDescription
+        jobDescription: data.jobDescription,
+        urgency: data.urgency,
+        preferredDate: data.preferredDate
       }
     })
 
@@ -68,7 +72,7 @@ export async function POST(req: Request) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: "Invalid data", details: error.errors },
+        { error: "Invalid data", details: error.issues },
         { status: 400 }
       )
     }
@@ -80,7 +84,7 @@ export async function POST(req: Request) {
 
 export async function GET() {
   try {
-    const session = await getServerSession(authOptions)
+    const session = await auth()
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })

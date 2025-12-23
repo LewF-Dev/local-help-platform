@@ -37,6 +37,14 @@ export default function RegisterPage() {
     { value: "LANDSCAPER", label: "Landscaper" },
     { value: "WINDOW_CLEANER", label: "Window Cleaner" },
     { value: "HANDYMAN", label: "Handyman" },
+    { value: "CLEANER", label: "Cleaner" },
+    { value: "MOBILE_BARBER", label: "Mobile Barber" },
+    { value: "MOBILE_BEAUTICIAN", label: "Mobile Beautician" },
+    { value: "MASSAGE_THERAPIST", label: "Massage Therapist" },
+    { value: "PERSONAL_TRAINER", label: "Personal Trainer" },
+    { value: "MOBILE_MECHANIC", label: "Mobile Mechanic" },
+    { value: "IT_SUPPORT", label: "IT Support (On-site)" },
+    { value: "PHOTOGRAPHER", label: "Photographer (Events)" },
     { value: "OTHER", label: "Other" }
   ]
 
@@ -112,7 +120,7 @@ export default function RegisterPage() {
                   : "bg-slate-100 text-slate-700 hover:bg-slate-200"
               }`}
             >
-              I'm a Customer
+              I Need Help
             </button>
             <button
               type="button"
@@ -123,7 +131,7 @@ export default function RegisterPage() {
                   : "bg-slate-100 text-slate-700 hover:bg-slate-200"
               }`}
             >
-              I'm a Trade
+              I Offer Services
             </button>
           </div>
 
@@ -168,7 +176,7 @@ export default function RegisterPage() {
               <>
                 <div className="border-t pt-4 mt-6">
                   <h3 className="text-lg font-semibold text-slate-900 mb-4">
-                    Trade Profile
+                    Service Profile
                   </h3>
                 </div>
 

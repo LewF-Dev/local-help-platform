@@ -9,31 +9,31 @@ export default function Home() {
   const categories = [
     { name: "Plumbers", icon: "🔧" },
     { name: "Electricians", icon: "⚡" },
-    { name: "Builders", icon: "🏗️" },
-    { name: "Painters", icon: "🎨" },
-    { name: "Carpenters", icon: "🪚" },
-    { name: "Landscapers", icon: "🌳" },
+    { name: "Cleaners", icon: "🧹" },
+    { name: "Handyman", icon: "🛠️" },
+    { name: "Barbers", icon: "✂️" },
+    { name: "Personal Trainers", icon: "💪" },
   ]
 
   const features = [
     {
-      title: "Verified Trades",
-      description: "All tradespeople are verified before appearing in search results",
+      title: "Verified Professionals",
+      description: "All service providers are verified before appearing in search results",
       icon: "✓"
     },
     {
       title: "Local Focus",
-      description: "Find trades working in your area using postcode search",
+      description: "Find help in your area using postcode search",
       icon: "📍"
     },
     {
       title: "Direct Contact",
-      description: "Contact trades directly or send enquiries through the platform",
+      description: "Contact providers directly or send enquiries through the platform",
       icon: "💬"
     },
     {
-      title: "Fair Pricing",
-      description: "No commission fees - trades pay a simple monthly subscription",
+      title: "Fair & Transparent",
+      description: "No commission fees - providers pay a simple monthly subscription",
       icon: "💰"
     }
   ]
@@ -51,22 +51,22 @@ export default function Home() {
             className="text-center"
           >
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6">
-              Find Local Trades
+              Find Local Help
               <br />
-              <span className="text-blue-200">In Your Area</span>
+              <span className="text-blue-200">When You Need It</span>
             </h1>
             <p className="text-xl sm:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
-              Connect with verified local tradespeople. No middleman, no commission, just direct contact with skilled professionals.
+              Connect with verified local professionals who can come to you. No middleman, no commission, just direct contact with people who can help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/search">
                 <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50 text-lg px-8 py-6">
-                  Find a Trade
+                  Find Help
                 </Button>
               </Link>
               <Link href="/register">
                 <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 text-lg px-8 py-6">
-                  Join as a Trade
+                  Offer Services
                 </Button>
               </Link>
             </div>
@@ -103,10 +103,10 @@ export default function Home() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              Why Choose LocalTrades?
+              Why Choose LocalHelp?
             </h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              We make it easy to find and hire local tradespeople
+              Find someone local who can come to you and get it done
             </p>
           </motion.div>
 
@@ -141,29 +141,29 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl font-bold text-slate-900 mb-6">
-                For Customers
+                Need Help?
               </h2>
               <div className="space-y-4 text-lg text-slate-600">
                 <p className="flex items-start">
                   <span className="text-2xl mr-3">🔍</span>
-                  <span>Search by postcode to find trades in your area</span>
+                  <span>Search by postcode to find local help</span>
                 </p>
                 <p className="flex items-start">
                   <span className="text-2xl mr-3">✉️</span>
-                  <span>Send enquiries directly through the platform</span>
+                  <span>Send enquiries with your timeline and needs</span>
                 </p>
                 <p className="flex items-start">
                   <span className="text-2xl mr-3">📞</span>
-                  <span>Get direct contact details for verified trades</span>
+                  <span>Get direct contact details for verified providers</span>
                 </p>
                 <p className="flex items-start">
                   <span className="text-2xl mr-3">⭐</span>
-                  <span>All trades are verified before listing</span>
+                  <span>See reliability scores based on real behavior</span>
                 </p>
               </div>
               <Link href="/search">
                 <Button size="lg" className="mt-8">
-                  Start Searching
+                  Find Help Now
                 </Button>
               </Link>
             </motion.div>
@@ -174,7 +174,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl font-bold text-slate-900 mb-6">
-                For Trades
+                Offer Services?
               </h2>
               <div className="space-y-4 text-lg text-slate-600">
                 <p className="flex items-start">
@@ -187,7 +187,7 @@ export default function Home() {
                 </p>
                 <p className="flex items-start">
                   <span className="text-2xl mr-3">📊</span>
-                  <span>Manage all enquiries from your dashboard</span>
+                  <span>Build your reliability score through good service</span>
                 </p>
                 <p className="flex items-start">
                   <span className="text-2xl mr-3">🎯</span>
@@ -196,7 +196,7 @@ export default function Home() {
               </div>
               <Link href="/register">
                 <Button size="lg" className="mt-8">
-                  Join Now
+                  Join as Provider
                 </Button>
               </Link>
             </motion.div>
@@ -215,17 +215,17 @@ export default function Home() {
               Ready to Get Started?
             </h2>
             <p className="text-xl text-blue-100 mb-8">
-              Join thousands of customers and trades connecting locally
+              Join people finding and offering local help
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/search">
                 <Button size="lg" className="bg-white text-blue-600 hover:bg-blue-50">
-                  Find a Trade
+                  Find Help
                 </Button>
               </Link>
               <Link href="/register">
                 <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10">
-                  Register as Trade
+                  Offer Services
                 </Button>
               </Link>
             </div>

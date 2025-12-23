@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { formatCategory } from "@/lib/utils"
+import { calculateReliabilityScore, formatReliabilityLabel } from "@/lib/reliability"
 
 interface Trade {
   id: string
@@ -17,6 +18,13 @@ interface Trade {
   postcode: string
   serviceRadius: number
   distance: number
+  verified: boolean
+  enquiriesReceived: number
+  enquiriesResponded: number
+  enquiriesAccepted: number
+  averageResponseTime: number | null
+  lastActive: string
+  createdAt: string
   user: {
     name: string
     email: string
@@ -38,11 +46,13 @@ export default function SearchPage() {
     clientEmail: "",
     clientPhone: "",
     clientPostcode: "",
-    jobDescription: ""
+    jobDescription: "",
+    urgency: "FLEXIBLE",
+    preferredDate: ""
   })
 
   const categories = [
-    { value: "ALL", label: "All Categories" },
+    { value: "ALL", label: "All Services" },
     { value: "PLUMBER", label: "Plumber" },
     { value: "ELECTRICIAN", label: "Electrician" },
     { value: "CARPENTER", label: "Carpenter" },
@@ -54,6 +64,14 @@ export default function SearchPage() {
     { value: "LANDSCAPER", label: "Landscaper" },
     { value: "WINDOW_CLEANER", label: "Window Cleaner" },
     { value: "HANDYMAN", label: "Handyman" },
+    { value: "CLEANER", label: "Cleaner" },
+    { value: "MOBILE_BARBER", label: "Mobile Barber" },
+    { value: "MOBILE_BEAUTICIAN", label: "Mobile Beautician" },
+    { value: "MASSAGE_THERAPIST", label: "Massage Therapist" },
+    { value: "PERSONAL_TRAINER", label: "Personal Trainer" },
+    { value: "MOBILE_MECHANIC", label: "Mobile Mechanic" },
+    { value: "IT_SUPPORT", label: "IT Support" },
+    { value: "PHOTOGRAPHER", label: "Photographer" },
     { value: "OTHER", label: "Other" }
   ]
 
@@ -104,7 +122,9 @@ export default function SearchPage() {
         clientEmail: "",
         clientPhone: "",
         clientPostcode: "",
-        jobDescription: ""
+        jobDescription: "",
+        urgency: "FLEXIBLE",
+        preferredDate: ""
       })
       alert("Enquiry sent successfully!")
     } catch (error) {
@@ -122,10 +142,10 @@ export default function SearchPage() {
           className="mb-8"
         >
           <h1 className="text-4xl font-bold text-slate-900 mb-2">
-            Find Local Trades
+            Find Local Help
           </h1>
           <p className="text-slate-600">
-            Search for verified tradespeople in your area
+            Search for verified service providers in your area
           </p>
         </motion.div>
 
@@ -177,38 +197,63 @@ export default function SearchPage() {
             {trades.length === 0 ? (
               <Card>
                 <p className="text-center text-slate-600 py-8">
-                  No trades found in your area. Try expanding your search or selecting a different category.
+                  No service providers found in your area. Try expanding your search or selecting a different category.
                 </p>
               </Card>
             ) : (
               <div className="space-y-4">
                 <h2 className="text-2xl font-bold text-slate-900">
-                  {trades.length} {trades.length === 1 ? "Trade" : "Trades"} Found
+                  {trades.length} {trades.length === 1 ? "Provider" : "Providers"} Found
                 </h2>
-                {trades.map((trade, index) => (
-                  <motion.div
-                    key={trade.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                  >
-                    <Card hover>
-                      <div className="flex justify-between items-start mb-4">
-                        <div>
-                          <h3 className="text-2xl font-bold text-slate-900">
-                            {trade.businessName}
-                          </h3>
-                          <p className="text-slate-600">{formatCategory(trade.category)}</p>
+                {trades.map((trade, index) => {
+                  const reliability = calculateReliabilityScore({
+                    enquiriesReceived: trade.enquiriesReceived,
+                    enquiriesResponded: trade.enquiriesResponded,
+                    enquiriesAccepted: trade.enquiriesAccepted,
+                    averageResponseTime: trade.averageResponseTime,
+                    lastActive: new Date(trade.lastActive),
+                    verified: trade.verified,
+                    createdAt: new Date(trade.createdAt)
+                  })
+
+                  return (
+                    <motion.div
+                      key={trade.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      <Card hover>
+                        <div className="flex justify-between items-start mb-4">
+                          <div>
+                            <h3 className="text-2xl font-bold text-slate-900">
+                              {trade.businessName}
+                            </h3>
+                            <p className="text-slate-600">{formatCategory(trade.category)}</p>
+                          </div>
+                          <div className="text-right space-y-2">
+                            {trade.verified && (
+                              <span className="block px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+                                ✓ Verified
+                              </span>
+                            )}
+                            {reliability.percentage > 0 ? (
+                              <span 
+                                className="block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium"
+                                title={reliability.description}
+                              >
+                                {formatReliabilityLabel(reliability.percentage)}
+                              </span>
+                            ) : (
+                              <span className="block px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium">
+                                {reliability.label}
+                              </span>
+                            )}
+                            <p className="text-sm text-slate-600">
+                              ~{trade.distance} miles away
+                            </p>
+                          </div>
                         </div>
-                        <div className="text-right">
-                          <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
-                            ✓ Verified
-                          </span>
-                          <p className="text-sm text-slate-600 mt-2">
-                            ~{trade.distance} miles away
-                          </p>
-                        </div>
-                      </div>
 
                       <p className="text-slate-700 mb-4">{trade.description}</p>
 
@@ -237,7 +282,8 @@ export default function SearchPage() {
                       </div>
                     </Card>
                   </motion.div>
-                ))}
+                  )
+                })}
               </div>
             )}
           </motion.div>
@@ -297,6 +343,32 @@ export default function SearchPage() {
                     required
                   />
                 </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                    When do you need this done?
+                  </label>
+                  <select
+                    value={enquiryForm.urgency}
+                    onChange={(e) => setEnquiryForm({ ...enquiryForm, urgency: e.target.value })}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="ASAP">ASAP</option>
+                    <option value="TODAY">Today</option>
+                    <option value="THIS_WEEK">This Week</option>
+                    <option value="BY_DATE">By Specific Date</option>
+                    <option value="FLEXIBLE">Flexible</option>
+                  </select>
+                </div>
+
+                {enquiryForm.urgency === "BY_DATE" && (
+                  <Input
+                    label="Preferred Date"
+                    type="date"
+                    value={enquiryForm.preferredDate}
+                    onChange={(e) => setEnquiryForm({ ...enquiryForm, preferredDate: e.target.value })}
+                  />
+                )}
 
                 <div className="flex gap-2">
                   <Button type="submit" className="flex-1">

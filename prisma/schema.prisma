@@ -12,7 +12,7 @@ enum UserRole {
   ADMIN
 }
 
-enum TradeCategory {
+enum ServiceCategory {
   PLUMBER
   ELECTRICIAN
   CARPENTER
@@ -24,6 +24,14 @@ enum TradeCategory {
   LANDSCAPER
   WINDOW_CLEANER
   HANDYMAN
+  CLEANER
+  MOBILE_BARBER
+  MOBILE_BEAUTICIAN
+  MASSAGE_THERAPIST
+  PERSONAL_TRAINER
+  MOBILE_MECHANIC
+  IT_SUPPORT
+  PHOTOGRAPHER
   OTHER
 }
 
@@ -32,6 +40,14 @@ enum EnquiryStatus {
   ACCEPTED
   DECLINED
   CONTACTED
+}
+
+enum EnquiryUrgency {
+  ASAP
+  TODAY
+  THIS_WEEK
+  BY_DATE
+  FLEXIBLE
 }
 
 model User {
@@ -51,20 +67,25 @@ model User {
 }
 
 model TradeProfile {
-  id                String        @id @default(cuid())
-  userId            String        @unique
-  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                String          @id @default(cuid())
+  userId            String          @unique
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   businessName      String
-  category          TradeCategory
+  category          ServiceCategory
   description       String
   postcode          String
-  serviceRadius     Int           @default(10)
+  serviceRadius     Int             @default(10)
   
   verified          Boolean       @default(false)
   active            Boolean       @default(true)
   
   enquiriesReceived Int           @default(0)
+  enquiriesResponded Int          @default(0)
+  enquiriesAccepted Int           @default(0)
+  averageResponseTime Int?
+  lastActive        DateTime      @default(now())
+  
   freeUntil         Int           @default(3)
   subscriptionActive Boolean      @default(false)
   subscriptionEnds  DateTime?
@@ -94,7 +115,11 @@ model Enquiry {
   clientPostcode  String
   
   jobDescription  String
-  status          EnquiryStatus  @default(PENDING)
+  urgency         EnquiryUrgency? @default(FLEXIBLE)
+  preferredDate   String?
+  status          EnquiryStatus   @default(PENDING)
+  
+  respondedAt     DateTime?
   
   createdAt       DateTime       @default(now())
   updatedAt       DateTime       @updatedAt

@@ -21,7 +21,7 @@ export function Navbar() {
               whileHover={{ scale: 1.05 }}
               className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent"
             >
-              LocalTrades
+              LocalHelp
             </motion.div>
           </Link>
 
@@ -30,7 +30,7 @@ export function Navbar() {
               <>
                 <Link href="/search">
                   <Button variant="ghost" size="sm">
-                    Find Trades
+                    Find Help
                   </Button>
                 </Link>
                 <Link href="/dashboard">
@@ -57,7 +57,7 @@ export function Navbar() {
               <>
                 <Link href="/search">
                   <Button variant="ghost" size="sm">
-                    Find Trades
+                    Find Help
                   </Button>
                 </Link>
                 <Link href="/login">
