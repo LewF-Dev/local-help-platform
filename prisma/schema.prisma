@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum UserRole {
+  TRADE
+  CLIENT
+  ADMIN
+}
+
+enum TradeCategory {
+  PLUMBER
+  ELECTRICIAN
+  CARPENTER
+  PAINTER
+  BUILDER
+  ROOFER
+  PLASTERER
+  TILER
+  LANDSCAPER
+  WINDOW_CLEANER
+  HANDYMAN
+  OTHER
+}
+
+enum EnquiryStatus {
+  PENDING
+  ACCEPTED
+  DECLINED
+  CONTACTED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  role          UserRole  @default(CLIENT)
+  name          String
+  phone         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  tradeProfile  TradeProfile?
+  enquiries     Enquiry[]
+  
+  @@index([email])
+}
+
+model TradeProfile {
+  id                String        @id @default(cuid())
+  userId            String        @unique
+  user              User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  businessName      String
+  category          TradeCategory
+  description       String
+  postcode          String
+  serviceRadius     Int           @default(10)
+  
+  verified          Boolean       @default(false)
+  active            Boolean       @default(true)
+  
+  enquiriesReceived Int           @default(0)
+  freeUntil         Int           @default(3)
+  subscriptionActive Boolean      @default(false)
+  subscriptionEnds  DateTime?
+  
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  
+  receivedEnquiries Enquiry[]
+  
+  @@index([postcode])
+  @@index([category])
+  @@index([verified])
+}
+
+model Enquiry {
+  id              String         @id @default(cuid())
+  
+  clientId        String
+  client          User           @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  
+  tradeProfileId  String
+  tradeProfile    TradeProfile   @relation(fields: [tradeProfileId], references: [id], onDelete: Cascade)
+  
+  clientName      String
+  clientEmail     String
+  clientPhone     String
+  clientPostcode  String
+  
+  jobDescription  String
+  status          EnquiryStatus  @default(PENDING)
+  
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  
+  @@index([tradeProfileId])
+  @@index([clientId])
+  @@index([status])
+}
